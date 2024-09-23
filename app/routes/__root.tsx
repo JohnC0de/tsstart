@@ -1,0 +1,88 @@
+import { Toaster } from '@/components/ui/sonner'
+// import ogImage from '@/images/og.png'
+import { seo } from '@/lib/seo'
+import { cn } from '@/lib/utils'
+import '@/style.css'
+import appCss from '@/style.css?url'
+import type { QueryClient } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { Outlet, ScrollRestoration, createRootRouteWithContext } from '@tanstack/react-router'
+import { Body, Head, Html, Meta, Scripts } from '@tanstack/start'
+import * as React from 'react'
+
+const TanStackRouterDevtools = import.meta.env.PROD
+  ? () => null
+  : React.lazy(() =>
+      import('@tanstack/router-devtools').then(res => ({
+        default: res.TanStackRouterDevtools,
+      })),
+    )
+
+export const Route = createRootRouteWithContext<{
+  queryClient: QueryClient
+}>()({
+  meta: () => [
+    {
+      charSet: 'utf-8',
+    },
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1',
+    },
+    ...seo({
+      title: 'Create TSS App',
+      description: 'TanStack Start Starter Project',
+      // image: ogImage,
+      keywords: 'tanstack start,tanstack,react,reactjs,react query,open source,open source software,oss,software',
+    }),
+  ],
+  links: () => [
+    { rel: 'stylesheet', href: appCss },
+    {
+      rel: 'apple-touch-icon',
+      sizes: '180x180',
+      href: '/apple-touch-icon.png',
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '32x32',
+      href: '/favicon-32x32.png',
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '16x16',
+      href: '/favicon-16x16.png',
+    },
+    { rel: 'manifest', href: '/site.webmanifest', color: '#fffff' },
+    { rel: 'icon', href: '/favicon.ico' },
+  ],
+  component: RootComponent,
+})
+
+function RootComponent() {
+  return (
+    <RootDocument>
+      <Outlet />
+    </RootDocument>
+  )
+}
+
+function RootDocument({ children }: { children: React.ReactNode }) {
+  return (
+    <Html>
+      <Head>
+        <Meta />
+      </Head>
+      <Body className={cn('min-h-screen bg-background font-sans antialiased')} suppressHydrationWarning>
+        {children}
+        <Toaster richColors />
+        <ScrollRestoration />
+        <ReactQueryDevtools buttonPosition="bottom-left" />
+        <TanStackRouterDevtools position="bottom-right" />
+        <Scripts />
+      </Body>
+    </Html>
+  )
+}
