@@ -1,6 +1,9 @@
 {
-  "name": "template",
-  "module": "index.ts",
+  "name": "tsstart",
+  "version": "1.0.0",
+  "description": "An opnionated tanstack-start app template for create-tsstart.",
+  "author": "JohnC0de",
+  "license": "GNU GPLv3",
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
