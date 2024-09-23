@@ -2,6 +2,10 @@
 
 An opnionated tanstack-start app template for create-tsstart.
 
+## Acknowledgements
+
+- [tss-app - tsstart is mostly based on this project with some personal changes](https://github.com/ally-ahmed/tss-app)
+
 ## What's included
 
 - Runtime/Package Manager: bun
@@ -20,41 +24,44 @@ An opnionated tanstack-start app template for create-tsstart.
 - Toast: Sonner
 - Env: t3-oss/env-core
 
-## Acknowledgements
-
-- [tss-app - tsstart is mostly based on this project with some personal changes](https://github.com/ally-ahmed/tss-app)
-
 ## Getting Started
 
-Clone project
+Its easier to use the CLI to create the project.
 
-## ENV
+### The CLI way
 
-To run this project, you will need to add the following environment variables to your .env file
+```bash
+bun create tsstart <your-project-name>
+```
+
+### The manual way (repo clone)
+
+Instead of cloning the repo with git clone, i recommend using degit to clone the repo.
+
+```bash
+bunx degit JohnC0de/tsstart <your-project-name>
+```
+
+Cd to the directory and install dependencies
+
+```bash
+cd <your-project-name>
+bun install
+```
+
+Dont forget to setup the required env variables:
 
 `GITHUB_CLIENT_ID=""`
-
 `GITHUB_CLIENT_SECRET=""`
 
-```bash
-  git clone git@github.com:ally-ahmed/tss-app.git
-  cd tss-app
-```
-
-Install depndencies
+Setup the DB by creating the tables with drizzle-kit
 
 ```bash
-pnpm install
-```
-
-Create db and tables
-
-```bash
-pnpm db:push
+bun push
 ```
 
 Run app
 
 ```bash
-pnpm dev
+bun dev
 ```
